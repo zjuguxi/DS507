@@ -7,8 +7,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    public void testWithValidArgument() throws Exception {
+        String argument = "test";
+        ProcessBuilder processBuilder = new ProcessBuilder("microsoft", "oracle", argument);
+        Process process = processBuilder.start();
+
+        assertEquals(0, process.waitFor());
+    }
+
+    @Test
+    public void testWithNoArgument() throws Exception {
+        ProcessBuilder processBuilder = new ProcessBuilder("apple", "google");
+        Process process = processBuilder.start();
+
+        assertEquals(0, process.waitFor());
     }
 }

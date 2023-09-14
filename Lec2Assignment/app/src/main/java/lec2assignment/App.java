@@ -4,11 +4,38 @@
 package lec2assignment;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+
+    static String[] Companies = {"microsoft", "apple", "oracle", "google"};
+    static int max_attemps = 4;
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        if (args.length > 1 || args.length == 0) {
+            throw new IllegalArgumentException("Illegal arguments!");
+        }
+
+        String input = args[0];
+        boolean found = false;
+
+        for (String company: Companies) {
+
+            if (max_attemps == 0) {
+                System.out.println("You have reached the maximium attemps!");
+                System.exit(0);
+            }
+
+            if (input.equals(company)) {
+                System.out.printf("Bingo, it's %s\n", company);
+                found = true;
+                break;
+            } else {
+                System.out.println("Try it again!");
+            }
+            
+            max_attemps -= 1;
+        }
+        if(!found) {
+            System.out.println("Fail!");
+            System.exit(1);
+        }
     }
 }

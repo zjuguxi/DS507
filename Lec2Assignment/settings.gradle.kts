@@ -8,4 +8,5 @@
  */
 
 rootProject.name = "Lec2Assignment"
+
 include("app")
