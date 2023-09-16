@@ -3,6 +3,7 @@
  */
 package lec2assignment;
 import java.util.Scanner;
+import java.lang.Runtime;
 
 public class App {
 
@@ -10,11 +11,14 @@ public class App {
     static int max_attempts = 0;
 
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
+        Runtime run = Runtime.getRuntime();
 
         boolean found = false;
         Scanner scanner = new Scanner(System.in);
         while (true) {
 
+            long guess_start_time = System.nanoTime();
             if (max_attempts >= 4) {
                 System.out.println("You have reached the maximium attemps!");
                 break;
@@ -33,6 +37,9 @@ public class App {
                 }
             }
             
+            long guess_end_time = System.nanoTime();
+
+            System.out.println("Guess time is " + Long.toString(guess_end_time - guess_start_time));
         if (found) {
                 System.out.println("Congratulations!");
                 break;
@@ -42,8 +49,17 @@ public class App {
         max_attempts += 1;
         
         }
+
+        long endTime = System.nanoTime();
     
-    scanner.close();
+        scanner.close();
+
+        long totalMemory = run.freeMemory() / 1024;
+        long freeMemory = run.totalMemory() / 1024;
+
+        System.out.println("Used memory is: " + Long.toString(totalMemory - freeMemory));
+        System.out.println("Running time is " + Long.toString(endTime - startTime));
+
 
     }
 }
